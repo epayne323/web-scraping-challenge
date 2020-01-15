@@ -68,5 +68,5 @@ def scrape():
         hemisphere_image_urls.append({"title": title, "img_url": img_url})
     scraped_dict["hemisphere_image_urls"] = hemisphere_image_urls
 
-    
+
     return scraped_dict

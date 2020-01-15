@@ -6,22 +6,26 @@ import scrape_mars
 app = Flask(__name__)
 
 # Use flask_pymongo to set up mongo connection.
-# NOT WORKING
+# PREVIOUSLY NOT WORKING - fixed by restarting mongo
 app.config["MONGO_URI"] = "mongodb://localhost:27017/mission_to_mars"
 mongo = PyMongo(app)
 
-# identify the collection and drop any existing data for this demonstration
+# identify the collection
 mars = mongo.db.mars
-# mars.drop()
+
 
 @app.route("/")
 def index():
-    mars_data = mars.find()
+    # PREVIOUSLY NOT WORKING/EDITED AFTER DEADLINE  - fixed by changing .find() to .find_one(), where 
+    # .find() was pulling in all documents but only one was needed
+    mars_data = mars.find_one()
+
     return render_template("index.html", mars_data=mars_data)
 
 @app.route("/scrape.html")
 def scraper():
-
+    # EDITED AFTER DEADLINE - drop any existing data before new scrape
+    mars.drop()
     mars_data = scrape_mars.scrape()
 
     mars.insert_one(mars_data)

@@ -16,7 +16,6 @@
   </div>
 
   <div class="container">
-    <!-- Craigslist Listings -->
     <div class="row">
       <div class="col-md-12">
         <h3>Latest Mars News</h3>
@@ -43,7 +42,8 @@
         <div class="row">
           <div class="col">
             <h3>Mars Facts</h3>
-            {{ mars_data.mars_facts_html}}
+            <!-- PREVIOUSLY NOT WORKING/EDITED AFTER DEADLINE: was previously rendering raw html table-->
+            {{ mars_data.mars_facts_html|safe }}
           </div>
         </div>
       </div>
